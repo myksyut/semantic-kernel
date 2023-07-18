@@ -131,7 +131,7 @@ resource appServiceWeb 'Microsoft.Web/sites@2022-09-01' = {
     httpsOnly: true
     virtualNetworkSubnetId: virtualNetwork.properties.subnets[0].id
     siteConfig: {
-      linuxFxVersion: 'DOCKER|enaught/copilot-webapi:latest'
+      linuxFxVersion: 'DOCKER|enaught/cc-webapi:latest'
     }
   }
 }

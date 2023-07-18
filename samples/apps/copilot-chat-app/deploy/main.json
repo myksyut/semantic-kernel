@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.19.5.34762",
-      "templateHash": "14469749096723924748"
+      "templateHash": "12167137299027455595"
     }
   },
   "parameters": {
@@ -230,7 +230,7 @@
         "httpsOnly": true,
         "virtualNetworkSubnetId": "[reference(resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}', variables('uniqueName'))), '2021-05-01').subnets[0].id]",
         "siteConfig": {
-          "linuxFxVersion": "DOCKER|enaught/copilot-webapi:latest"
+          "linuxFxVersion": "DOCKER|enaught/cc-webapi:latest"
         }
       },
       "dependsOn": [
