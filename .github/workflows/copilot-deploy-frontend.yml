@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 jobs:
-  web-api:
+  web-app:
     environment: ${{inputs.ENVIRONMENT}}
     permissions:
       id-token: write
