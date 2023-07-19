@@ -26,6 +26,7 @@ jobs:
       AZURE_TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
       AZURE_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
       WEB_API_KEY: ${{secrets.WEB_API_KEY}}
+      AZURE_OPENAI_ENDPOINT: ${{secrets.AZURE_OPENAI_ENDPOINT}}
 
   # deploy-backend:
   #   needs: [build, deploy-infra]
