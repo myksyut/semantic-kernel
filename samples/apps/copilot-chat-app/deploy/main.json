@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.19.5.34762",
-      "templateHash": "12167137299027455595"
+      "templateHash": "18416176795495580662"
     }
   },
   "parameters": {
@@ -259,15 +259,15 @@
         "webSocketsEnabled": true,
         "appSettings": [
           {
-            "name": "AIService:Type",
+            "name": "AIService--Type",
             "value": "[parameters('aiService')]"
           },
           {
-            "name": "AIService:Endpoint",
+            "name": "AIService--Endpoint",
             "value": "[if(parameters('deployNewAzureOpenAI'), reference(resourceId('Microsoft.CognitiveServices/accounts', format('ai-{0}', variables('uniqueName'))), '2022-12-01').endpoint, parameters('aiEndpoint'))]"
           },
           {
-            "name": "AIService:Key",
+            "name": "AIService--Key",
             "value": "[if(parameters('deployNewAzureOpenAI'), listKeys(resourceId('Microsoft.CognitiveServices/accounts', format('ai-{0}', variables('uniqueName'))), '2022-12-01').key1, parameters('aiApiKey'))]"
           },
           {
