@@ -169,7 +169,7 @@ JSON_CONFIG=$(cat << EOF
     "webAppServiceSku": { "value": "$WEB_APP_SVC_SKU" },
     "aiService": { "value": "$AI_SERVICE_TYPE" },
     "aiApiKey": { "value": "$AI_SERVICE_KEY" },
-    "aiEndpoint": { "value": "$([ -z "$AI_ENDPOINT" ] && echo "$AI_ENDPOINT")" },
+    "aiEndpoint": { "value": "$([ ! -z "$AI_ENDPOINT" ] && echo "$AI_ENDPOINT")" },
     "deployNewAzureOpenAI": { "value": $([ "$NO_NEW_AZURE_OPENAI" = true ] && echo "false" || echo "true") },
     "deployQdrant": { "value": $([ "$NO_QDRANT" = true ] && echo "false" || echo "true") },
     "deployCosmosDB": { "value": $([ "$NO_COSMOS_DB" = true ] && echo "false" || echo "true") },
