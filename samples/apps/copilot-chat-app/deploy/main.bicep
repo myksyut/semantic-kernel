@@ -55,6 +55,9 @@ param deployQdrant bool = true
 @description('Whether to deploy Azure Speech Services to enable input by voice')
 param deploySpeechServices bool = true
 
+@description('Whether to deploy the backedn Web API package')
+param deployWebApiPackage bool = true
+
 @description('Region for the resources')
 param location string = resourceGroup().location
 
@@ -279,7 +282,7 @@ resource appServiceWebConfig 'Microsoft.Web/sites/config@2022-09-01' = {
   }
 }
 
-resource appServiceWebDeploy 'Microsoft.Web/sites/extensions@2022-09-01' = {
+resource appServiceWebDeploy 'Microsoft.Web/sites/extensions@2022-09-01' = if (deployWebApiPackage) {
   name: 'MSDeploy'
   kind: 'string'
   parent: appServiceWeb
@@ -307,9 +310,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
 resource appInsightExtension 'Microsoft.Web/sites/siteextensions@2022-09-01' = {
   parent: appServiceWeb
   name: 'Microsoft.ApplicationInsights.AzureWebSites'
-  dependsOn: [
-    appServiceWebDeploy
-  ]
+  dependsOn: deployWebApiPackage ? [ appServiceWebDeploy ] : [ appServiceWebConfig ]
 }
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {

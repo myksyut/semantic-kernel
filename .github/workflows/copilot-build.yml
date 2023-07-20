@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { dotnet: "6.0", configuration: Release, os: ubuntu-latest }
+          - { dotnet: "6.0", configuration: Release, os: windows-latest }
 
     runs-on: ${{ matrix.os }}
 
@@ -31,21 +31,25 @@ jobs:
         with:
           clean: true
 
-      - name: Pull container dotnet/sdk:${{ matrix.dotnet }}
-        run: docker pull mcr.microsoft.com/dotnet/sdk:${{ matrix.dotnet }}
+      # - name: Pull container dotnet/sdk:${{ matrix.dotnet }}
+      #   run: docker pull mcr.microsoft.com/dotnet/sdk:${{ matrix.dotnet }}
+
+      # - name: Package Copilot Chat WebAPI
+      #   run: |
+      #     sudo apt update && sudo apt -y install dotnet6
+      #     chmod +x $(pwd)/samples/apps/copilot-chat-app/deploy/package-webapi.sh;
+      #     samples/apps/copilot-chat-app/deploy/package-webapi.sh --configuration Release --runtime win-x64 --output ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy
 
       - name: Package Copilot Chat WebAPI
         run: |
-          sudo apt update && sudo apt -y install dotnet6
-          chmod +x $(pwd)/samples/apps/copilot-chat-app/deploy/package-webapi.sh;
-          samples/apps/copilot-chat-app/deploy/package-webapi.sh --configuration Release --runtime win-x64 --output ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy
+          samples/apps/copilot-chat-app/deploy/package-webapi.ps1 -Configuration Release -DotnetFramework net6.0 -TargetRuntime win-x64 -OutputDirectory ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy
 
       - name: Set version tag
         id: versiontag
         run: |
-          VERSION_TAG="$(date +'%Y%m%d').${{ github.run_number }}.${{ github.run_attempt }}"
+          $VERSION_TAG="$(date +'%Y%m%d').${{ github.run_number }}.${{ github.run_attempt }}"
           echo $VERSION_TAG
-          echo "versiontag=$VERSION_TAG" >> $GITHUB_OUTPUT
+          Write-Output "versiontag=$VERSION_TAG" >> $GITHUB_OUTPUT
 
       - name: Upload package to artifacts
         uses: actions/upload-artifact@v3
@@ -55,4 +59,4 @@ jobs:
 
       - name: "Set outputs"
         id: artifactoutput
-        run: echo "artifactname=copilotchat-webapi-${{ steps.versiontag.outputs.versiontag }}" >> $GITHUB_OUTPUT
+        run: Write-Output "artifactname=copilotchat-webapi-${{ steps.versiontag.outputs.versiontag }}" >> $GITHUB_OUTPUT
