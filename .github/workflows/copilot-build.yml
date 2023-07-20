@@ -42,12 +42,12 @@ jobs:
 
       - name: Package Copilot Chat WebAPI
         run: |
-          samples/apps/copilot-chat-app/deploy/package-webapi.ps1 -Configuration Release -DotnetFramework net6.0 -TargetRuntime win-x64 -OutputDirectory ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy
+          samples\apps\copilot-chat-app\deploy\package-webapi.ps1 -Configuration Release -DotnetFramework net6.0 -TargetRuntime win-x64 -OutputDirectory ${{ github.workspace }}\samples\apps\copilot-chat-app\deploy
 
       - name: Set version tag
         id: versiontag
         run: |
-          $VERSION_TAG="$(date +'%Y%m%d').${{ github.run_number }}.${{ github.run_attempt }}"
+          $VERSION_TAG="$(Get-Date -Format "MMddHHmmss")"
           echo $VERSION_TAG
           Write-Output "versiontag=$VERSION_TAG" >> $GITHUB_OUTPUT
 
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: copilotchat-webapi-${{ steps.versiontag.outputs.versiontag }}
-          path: ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy/out/webapi.zip
+          path: ${{ github.workspace }}\samples\apps\copilot-chat-app\deploy\out\webapi.zip
 
       - name: "Set outputs"
         id: artifactoutput
