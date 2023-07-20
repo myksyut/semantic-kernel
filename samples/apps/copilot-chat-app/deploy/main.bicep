@@ -156,15 +156,15 @@ resource appServiceWebConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     webSocketsEnabled: true
     appSettings: [
       {
-        name: 'AIService--Type'
+        name: 'AIService:Type'
         value: aiService
       }
       {
-        name: 'AIService--Endpoint'
+        name: 'AIService:Endpoint'
         value: deployNewAzureOpenAI ? openAI.properties.endpoint : aiEndpoint
       }
       {
-        name: 'AIService--Key'
+        name: 'AIService:Key'
         value: deployNewAzureOpenAI ? openAI.listKeys().key1 : aiApiKey
       }
       {
