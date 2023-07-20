@@ -259,6 +259,18 @@
         "webSocketsEnabled": true,
         "appSettings": [
           {
+            "name": "AIService__Type",
+            "value": "[parameters('aiService')]"
+          },
+          {
+            "name": "AIService__Endpoint",
+            "value": "[if(parameters('deployNewAzureOpenAI'), reference(resourceId('Microsoft.CognitiveServices/accounts', format('ai-{0}', variables('uniqueName'))), '2022-12-01').endpoint, parameters('aiEndpoint'))]"
+          },
+          {
+            "name": "AIService__Key",
+            "value": "[if(parameters('deployNewAzureOpenAI'), listKeys(resourceId('Microsoft.CognitiveServices/accounts', format('ai-{0}', variables('uniqueName'))), '2022-12-01').key1, parameters('aiApiKey'))]"
+          },
+          {
             "name": "AIService:Type",
             "value": "[parameters('aiService')]"
           },
