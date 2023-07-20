@@ -3,7 +3,7 @@ name: copilot-deploy-environment
 on:
   workflow_dispatch:
   push:
-    branches: ["copilot-pipeline"]
+    branches: ["copilot-pipeline-win"]
     paths:
       - "samples/apps/copilot-chat-app/**"
       - ".github/workflows/copilot-deploy*"

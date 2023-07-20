@@ -38,7 +38,7 @@ jobs:
         run: |
           sudo apt update && sudo apt -y install dotnet6
           chmod +x $(pwd)/samples/apps/copilot-chat-app/deploy/package-webapi.sh;
-          samples/apps/copilot-chat-app/deploy/package-webapi.sh --configuration Release --runtime linux-x64 --output ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy
+          samples/apps/copilot-chat-app/deploy/package-webapi.sh --configuration Release --runtime win-x64 --output ${{ github.workspace }}/samples/apps/copilot-chat-app/deploy
 
       - name: Set version tag
         id: versiontag
