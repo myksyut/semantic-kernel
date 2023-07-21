@@ -49,7 +49,7 @@ jobs:
         run: |
           $VERSION_TAG="$(Get-Date -Format "MMddHHmmss")"
           echo $VERSION_TAG
-          Write-Output "versiontag=$VERSION_TAG" >> $GITHUB_OUTPUT
+          Write-Output "versiontag=$VERSION_TAG" >> $env:$GITHUB_OUTPUT
 
       - name: Upload package to artifacts
         uses: actions/upload-artifact@v3
@@ -59,4 +59,4 @@ jobs:
 
       - name: "Set outputs"
         id: artifactoutput
-        run: Write-Output "artifactname=copilotchat-webapi-${{ steps.versiontag.outputs.versiontag }}" >> $GITHUB_OUTPUT
+        run: Write-Output "artifactname=copilotchat-webapi-${{ steps.versiontag.outputs.versiontag }}" >> $env:$GITHUB_OUTPUT
